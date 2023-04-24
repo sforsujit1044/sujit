@@ -11,6 +11,9 @@ public with sharing abstract class BaseDto {
   protected BaseDto(SObject sObj) {
     this.sObj = sObj;
     this.id = sObj.Id;
+    this.name = (String)sObj.get('Name');
+    this.startDate = (Date)sObj.get('Start_Date__c');
+    this.endDate = (Date)sObj.get('EndDate__c');
   }
 
   @AuraEnabled
@@ -20,6 +23,10 @@ public with sharing abstract class BaseDto {
   public Id id { get; set; }
   @AuraEnabled
   public String name { get; set; }
+  @AuraEnabled
+  public Date startDate { get; set; }
+  @AuraEnabled
+  public Date endDate { get; set; }
 
   public Boolean isInsert() {
     return operationType == OPERATION_TYPE_INSERT;
